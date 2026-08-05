@@ -1,0 +1,50 @@
+.messageItem {
+  padding: 8px;
+  max-width: 400px;
+
+  &__container {
+    padding-bottom: 8px;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__avatarSlot {
+    margin-right: 8px;
+    width: 50px;
+    height: 50px;
+  }
+
+  &__senderName {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding-bottom: 3px;
+  }
+
+  &__fromSystem {
+    background: #129b88;
+    color: #223f65;
+    border-radius: 12px 12px 12px 12px;
+  }
+
+  &__withAvatar {
+    border-radius: 0px 12px 12px 12px;
+  }
+
+  &__imagesContainer {
+    margin-top: 4px;
+  }
+
+  &__timeLabel {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    flex-shrink: 0;
+    margin-top: 4px;
+    user-select: none;
+    transition: color 0.2s ease;
+  }
+}

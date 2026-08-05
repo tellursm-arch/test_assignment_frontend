@@ -1,0 +1,52 @@
+{
+  "name": "test_assignment",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint",
+    "lint-types": "tsc --noEmit",
+    "stylelint": "stylelint \"src/**/*.{css,scss,sass}\"",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@gravity-ui/icons": "^2.21.0",
+    "@gravity-ui/navigation": "^6.4.0",
+    "@gravity-ui/uikit": "^7.47.2",
+    "classnames": "^2.5.1",
+    "mobx": "^7.0.0",
+    "mobx-react-lite": "^5.0.0",
+    "next": "^16.3.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-virtuoso": "^4.18.11"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.2.1",
+    "@gravity-ui/aikit": "^2.15.0",
+    "@gravity-ui/eslint-config": "^4.3.2",
+    "@gravity-ui/prettier-config": "^1.1.1",
+    "@gravity-ui/stylelint-config": "^5.0.0",
+    "@gravity-ui/tsconfig": "^1.0.0",
+    "@gravity-ui/uikit-themer": "^1.8.1",
+    "@storybook/addon-a11y": "^10.5.6",
+    "@storybook/addon-docs": "^10.5.6",
+    "@storybook/nextjs": "^10.5.6",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^16.3.0",
+    "eslint-plugin-storybook": "^10.5.6",
+    "playwright": "^1.62.1",
+    "sass": "^1.102.0",
+    "storybook": "^10.5.6",
+    "stylelint": "^16.18.0",
+    "typescript": "^5.9.2",
+    "webpack": "^5.109.2",
+    "webpack-cli": "^7.2.2"
+  }
+}

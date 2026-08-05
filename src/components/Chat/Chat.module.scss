@@ -1,0 +1,16 @@
+.chatWrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    &__messagesWrapper {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    &__spinner {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
