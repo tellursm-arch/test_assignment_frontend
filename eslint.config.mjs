@@ -15,6 +15,16 @@ const eslintConfig = defineConfig([...nextVitals, ...nextTs, {
   },
   rules: {
     "@typescript-eslint/no-explicit-any": "error",
+    'semi': ['error', 'always'],
+    'indent': ['error', 2],
+    'no-multi-spaces': 'error',
+    'space-before-blocks': ['error', 'always'],
+    'keyword-spacing': ['error', { before: true, after: true }],
+    'space-infix-ops': 'error',
+    'comma-spacing': ['error', { before: false, after: true }],
+    'object-curly-spacing': ['error', 'always'],
+    'array-bracket-spacing': ['error', 'never'],
+    'block-spacing': ['error', 'always'],
   },
 }, globalIgnores([
   ".storybook/**/*",

@@ -1,26 +1,11 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { messagesApi } from '@api/messages';
 import type { MessageT } from '@api/types';
-import { MessageItemProps } from '@/components/MessageItem';
+import { MessageItemProps } from '@components/MessageItem';
+import formatFullTime from '@utils/formatFullTime';
 
-const PAGE_SIZE = 50;
+export const PAGE_SIZE = 200;
 const MAX_PAGES_AT_CLIENT = 4;
-
-function formatFullTime(timestamp: string | Date): string {
-  const date = typeof timestamp === 'string' ? new Date(timestamp) : timestamp;
-  return date.toLocaleString('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-}
-
-export type MessagesGroup = {
-  date: string,
-  senderName: string,
-  time: string,
-}
 
 export class ChatStore {
   messages: MessageT[] = [];
@@ -56,7 +41,7 @@ export class ChatStore {
     try {
       this.startLoadData(direction);
 
-      const newPage = direction === 'up' ? this.currentTopPage + 1 : this.currentBottomPage - 1
+      const newPage = direction === 'up' ? this.currentTopPage + 1 : this.currentBottomPage - 1;
 
       if (newPage < 1) {
         this.hasMoreDown = false;
@@ -64,7 +49,6 @@ export class ChatStore {
       }
 
       const response = await messagesApi.getMessages(newPage, PAGE_SIZE);
-      console.log(response.messages)
 
       runInAction(() => {
         if (response.messages.length === 0) {
@@ -79,26 +63,23 @@ export class ChatStore {
 
             this.currentTopPage = newPage;
             this.listStartIndex -= response.messages.length;
-            this.messages = [...response.messages.toReversed(), ...this.messages];
+            this.messages.unshift(...response.messages.toReversed());
 
             if (this.currentTopPage - this.currentBottomPage > MAX_PAGES_AT_CLIENT) {
-              this.currentBottomPage +=1;
+              this.currentBottomPage += 1;
               this.messages.splice(-PAGE_SIZE);
             }
 
           } else {
-
             this.currentBottomPage = newPage;
             this.listStartIndex += response.messages.length;
-            this.messages = [...this.messages, ...response.messages.toReversed()];
+            this.messages.push(...response.messages.toReversed());
 
             if (this.currentTopPage - this.currentBottomPage > MAX_PAGES_AT_CLIENT) {
-              this.currentTopPage -=1;
+              this.currentTopPage -= 1;
               this.messages.splice(0, PAGE_SIZE);
             }
-
           }
-
         }
         this.isLoading = false;
       });
@@ -107,17 +88,15 @@ export class ChatStore {
         this.isLoading = false;
         this.error = error instanceof Error ? error.message : 'Ошибка загрузки сообщений';
         console.error('loadMoreMessages error:', error);
-      })
+      });
     }
   }
 
   async loadMoreMessagesUp() {
-    console.log(this.currentTopPage + 1);
     this.loadMoreMessages('up');
   }
 
   async loadMoreMessagesDown() {
-    console.log(this.currentBottomPage - 1);
     this.loadMoreMessages('down');
   }
 
@@ -156,7 +135,7 @@ export class ChatStore {
           images: message.images,
           id: message.id,
           senderName: k === i ? message.sender.name : undefined,
-          senderAvatar: k === i ? message.sender.avatar : undefined,
+          senderAvatarText: k === i ? message.sender.name[0] : undefined,
           time: k === j - 1 ? timeKey : undefined,
         };
         result.push(item);
@@ -173,10 +152,10 @@ export class ChatStore {
   }
 
   clearErrors() {
-    this.error = null
+    this.error = null;
   }
 
   getMessage(index: number): MessageT | undefined {
-    return this.messages[index]
+    return this.messages[index];
   }
 }

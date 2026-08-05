@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
-import { Chat, ChatProps } from '.';
+import { ChatProps } from './types';
+import Chat from './Chat';
 import { defaultChat } from './Chat.stub';
 
 const meta = {

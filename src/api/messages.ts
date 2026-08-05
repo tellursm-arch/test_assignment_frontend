@@ -1,9 +1,10 @@
 import { MessageT, MessageBeingSentT, GetMessagesResponseT } from './';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_URL = process.env.API_URL || '';
+const API_PORT = process.env.API_PORT || '';
 
 export const API_ENDPOINTS = {
-  messages: `${API_BASE_URL}/api/messages`,
+  messages: `/api/messages`,
 };
 
 export async function apiFetch<T>(
@@ -27,11 +28,14 @@ export async function apiFetch<T>(
 
 export const messagesApi = {
   getMessages: (page: number, limit: number) => {
-    const url = new URL(API_ENDPOINTS.messages);
-    url.searchParams.set('page', String(page));
-    url.searchParams.set('limit', String(limit));
 
-    return apiFetch<GetMessagesResponseT>(url.toString());
+    const params = new URLSearchParams({ page: String(page), limit: String(limit) });
+    let url = `${API_ENDPOINTS.messages}?${params.toString()}`;
+    if (typeof window === 'undefined') {
+      url = `http://${API_URL}${API_PORT ? `:${API_PORT}` : ''}${url}`
+    }
+
+    return apiFetch<GetMessagesResponseT>(url);
   },
 
   sendMessage: (message: MessageBeingSentT) => {
@@ -41,6 +45,6 @@ export const messagesApi = {
     }>(API_ENDPOINTS.messages, {
       method: 'POST',
       body: JSON.stringify(message),
-    })
+    });
   },
-}
+};

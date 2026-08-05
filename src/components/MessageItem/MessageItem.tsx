@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { memo } from 'react';
 import type { MessageItemProps } from './';
@@ -13,13 +13,21 @@ export const MessageItem: React.FC<MessageItemProps> = memo((props) => {
     images,
     time,
     senderAvatar,
+    senderAvatarText,
     senderName
   } = props;
 
   return (
     <div className={styles.messageItem__container}>
       <div className={styles.messageItem__avatarSlot}>
-        {senderAvatar ? <Avatar imgUrl={senderAvatar}/> : null}
+        {senderAvatar || senderAvatarText ? 
+          <Avatar
+            backgroundColor="#FF6B6B"
+            className={styles.messageItem__avatar}
+            text={senderAvatarText || ''}
+            imgUrl={senderAvatar}
+          /> : null
+        }
       </div>
       <div
         className={cn(
@@ -46,7 +54,7 @@ export const MessageItem: React.FC<MessageItemProps> = memo((props) => {
         {time ? <div className={styles.messageItem__timeLabel}>{time}</div> : null}
       </div>
     </div>
-  )
+  );
 });
 
 MessageItem.displayName = 'MessageItem';

@@ -1,9 +1,10 @@
-'use client'
+'use client';
 
-import { ChatHeaderProps } from "./"
+import { memo } from "react";
+import { ChatHeaderProps } from "./";
 import styles from './ChatHeader.module.scss';
 
-const ChatHeader: React.FC<ChatHeaderProps> = (props) => {
+const ChatHeader: React.FC<ChatHeaderProps> = memo((props) => {
   const {
     title,
     subtitle
@@ -17,7 +18,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = (props) => {
 
       {subtitle && <span className={styles.header__subtitle}>{subtitle}</span>}
     </div>
-  )
-};
+  );
+});
 
 export default ChatHeader;

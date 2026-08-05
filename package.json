@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
-    "start": "next start",
+    "start": "next start -p 80",
     "lint": "eslint",
+    "lint:fix": "eslint . --fix",
     "lint-types": "tsc --noEmit",
     "stylelint": "stylelint \"src/**/*.{css,scss,sass}\"",
+    "stylelint:fix": "stylelint \"src/**/*.{css,scss,sass}\" --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

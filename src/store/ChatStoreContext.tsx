@@ -1,7 +1,7 @@
-'use client'
-import { createContext, useContext, ReactNode, useMemo } from 'react'
-import { ChatStore } from '@/store/ChatStore'
-import type { MessageT } from '@/api/index'
+'use client';
+import { createContext, useContext, ReactNode, useMemo } from 'react';
+import { ChatStore } from '@store/ChatStore';
+import type { MessageT } from '@api/index';
 
 const StoreContext = createContext<ChatStore | null>(null);
 
@@ -17,7 +17,7 @@ export function ChatStoreProvider({ children, initialMessages }: StoreProviderPr
     <StoreContext.Provider value={store}>
       {children}
     </StoreContext.Provider>
-  )
+  );
 }
 
 export function useChatStore(): ChatStore | null {

@@ -1,9 +1,18 @@
 .messageImage {
-  display: block;
-  height: auto;
-  max-height: 300px;
-  width: 100%;
-  object-fit: contain;
-  border-radius: 10px;
-  background-color: #ffffff;
+  &__image {
+    height: auto;
+    max-height: 300px;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    content-visibility: auto;
+  }
+
+  &__hide {
+    height: 0;
+  }
+
+  &__visible {
+    height: auto;
+  }
 }

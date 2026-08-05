@@ -1,54 +1,36 @@
-'use client'
-
 import { ChatHeader } from "../ChatHeader";
-import { ChatProps } from "./"
+import { ChatProps } from "./types";
 import styles from './Chat.module.scss';
-import { Virtuoso } from "react-virtuoso";
-import { MessageItem } from "../MessageItem";
+import { memo } from "react";
+import dynamic from "next/dynamic";
 import { Spin } from "@gravity-ui/uikit";
 
-const Spinner: React.FC = () => (<div className={styles.chatWrapper__spinner}><Spin/></div>)
+const MessagesList = dynamic(() => import('@components/MessagesList'), {
+  ssr: false,
+  loading: () => { //TODO: унести в отдельную папку компонента
+    return (
+      <div className={styles.loader}>
+        <Spin size='xl'/>
+      </div>
+    )
+  },
+});
 
-const Chat: React.FC<ChatProps> = (props) => {
+const Chat: React.FC<ChatProps> = memo((props) => {
   const {
-    messages,
-    onLoadMoreUp,
-    onLoadMoreDown,
-    groupsCount,
-    listStartIndex,
-    isLoading,
     title,
     subtitle,
+    ...other
   } = props;
 
   return (
     <div className={styles.chatWrapper}>
       <ChatHeader title={title} subtitle={subtitle}/>
-      <div
-        className={styles.chatWrapper__messagesWrapper}
-      >
-        <Virtuoso
-          initialTopMostItemIndex={groupsCount}
-          firstItemIndex={listStartIndex}
-          atTopThreshold={500}
-          atBottomThreshold={500}
-          data={messages}
-          startReached={onLoadMoreUp}
-          endReached={onLoadMoreDown}
-          itemContent={(_, item) => (
-            <MessageItem
-              {...item}
-              key={item.id}
-            />
-          )}
-          components={{
-            Header: isLoading ? Spinner : undefined,
-            Footer: isLoading ? Spinner : undefined,
-          }}
-        />
-      </div>
+      <MessagesList
+        {...other}
+      />
     </div>
   );
-};
+});
 
 export default Chat;
