@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import type { MessageItemProps } from './';
 import styles from './MessageItem.module.scss';
 import { Avatar } from '@gravity-ui/uikit';
@@ -16,10 +16,6 @@ export const MessageItem: React.FC<MessageItemProps> = memo((props) => {
     senderAvatarText,
     senderName
   } = props;
-
-  useEffect(() => {
-    console.log(text);
-  }, [text, images, time]);
 
   return (
     <div className={styles.messageItem__container}>
@@ -59,6 +55,8 @@ export const MessageItem: React.FC<MessageItemProps> = memo((props) => {
       </div>
     </div>
   );
+}, (prev, next) => {
+  return prev.id === next.id;
 });
 
 MessageItem.displayName = 'MessageItem';

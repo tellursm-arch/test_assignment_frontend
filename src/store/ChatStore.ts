@@ -102,18 +102,17 @@ export class ChatStore {
 
   get groupedMessages() { //TODO: Надо вынести в хук, форматирование в сторе не оч
     const result: MessageItemProps[] = [];
-    const messages = this.messages;
     let i = 0;
 
-    while (i < messages.length) {
-      const current = messages[i];
+    while (i < this.messages.length) {
+      const current = this.messages[i];
       const dateKey = new Date(current.timestamp).toLocaleDateString();
       const timeKey = formatFullTime(current.timestamp);
 
       let j = i + 1;
 
-      while (j < messages.length) {
-        const next = messages[j];
+      while (j < this.messages.length) {
+        const next = this.messages[j];
         const nextDateKey = new Date(next.timestamp).toLocaleDateString();
         const nextTimeKey = formatFullTime(next.timestamp);
 
@@ -129,7 +128,7 @@ export class ChatStore {
       }
 
       for (let k = i; k < j; k++) {
-        const message = messages[k];
+        const message = this.messages[k];
         const item: MessageItemProps = {
           text: message.text,
           images: message.images,

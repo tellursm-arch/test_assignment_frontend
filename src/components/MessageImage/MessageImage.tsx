@@ -1,6 +1,6 @@
 'use client';
 
-import { memo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { MessageImageProps } from './';
 import styles from './MessageImage.module.scss';
 import { Skeleton } from '@gravity-ui/uikit';
@@ -10,14 +10,11 @@ import Image from 'next/image';
 export const MessageImage: React.FC<MessageImageProps> = memo((props) => {
   const [currentSrc, setCurrentSrc] = useState<string>(props.src);
   const [isLoading, setIsLoading] = useState(true);
+  const skeleton = useMemo(() => (<Skeleton style={{ width: '100%', height: 282, borderRadius: '8px', objectFit: 'contain' }}/>), []);
 
   return (
     <>
-      {isLoading && (
-        <Skeleton
-          style={{ width: '100%', height: 282, borderRadius: '8px', objectFit: 'contain' }}
-        />
-      )}
+      {isLoading && skeleton}
       <Image
         src={currentSrc}
         alt={props.alt || ''}
