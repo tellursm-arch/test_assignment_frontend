@@ -4,7 +4,7 @@ import type { MessageT } from '@api/types';
 import { MessageItemProps } from '@components/MessageItem';
 import formatFullTime from '@utils/formatFullTime';
 
-export const PAGE_SIZE = 200;
+export const PAGE_SIZE = 300;
 const MAX_PAGES_AT_CLIENT = 4;
 
 export class ChatStore {

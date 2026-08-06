@@ -15,7 +15,7 @@ export const MessageImage: React.FC<MessageImageProps> = memo((props) => {
     <>
       {isLoading && (
         <Skeleton
-          style={{ width: '100%', height: 280, borderRadius: '8px' }}
+          style={{ width: '100%', height: 282, borderRadius: '8px', objectFit: 'contain' }}
         />
       )}
       <Image
