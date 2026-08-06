@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import type { MessageItemProps } from './';
 import styles from './MessageItem.module.scss';
 import { Avatar } from '@gravity-ui/uikit';
@@ -16,6 +16,10 @@ export const MessageItem: React.FC<MessageItemProps> = memo((props) => {
     senderAvatarText,
     senderName
   } = props;
+
+  useEffect(() => {
+    console.log(text);
+  }, [text, images, time]);
 
   return (
     <div className={styles.messageItem__container}>

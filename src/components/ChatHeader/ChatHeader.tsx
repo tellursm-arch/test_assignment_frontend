@@ -21,4 +21,6 @@ const ChatHeader: React.FC<ChatHeaderProps> = memo((props) => {
   );
 });
 
+ChatHeader.displayName = 'ChatHeader';
+
 export default ChatHeader;

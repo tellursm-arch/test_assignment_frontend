@@ -32,7 +32,7 @@ export const messagesApi = {
     const params = new URLSearchParams({ page: String(page), limit: String(limit) });
     let url = `${API_ENDPOINTS.messages}?${params.toString()}`;
     if (typeof window === 'undefined') {
-      url = `http://${API_URL}${API_PORT ? `:${API_PORT}` : ''}${url}`
+      url = `http://${API_URL}${API_PORT ? `:${API_PORT}` : ''}${url}`;
     }
 
     return apiFetch<GetMessagesResponseT>(url);

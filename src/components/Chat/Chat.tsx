@@ -12,7 +12,7 @@ const MessagesList = dynamic(() => import('@components/MessagesList'), {
       <div className={styles.loader}>
         <Spin size='xl'/>
       </div>
-    )
+    );
   },
 });
 
@@ -32,5 +32,7 @@ const Chat: React.FC<ChatProps> = memo((props) => {
     </div>
   );
 });
+
+Chat.displayName = 'Chat';
 
 export default Chat;

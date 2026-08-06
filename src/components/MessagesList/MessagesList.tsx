@@ -5,11 +5,11 @@ import styles from './MessagesList.module.scss';
 import { Virtuoso } from "react-virtuoso";
 import { MessageItem } from "../MessageItem";
 import { Spin } from "@gravity-ui/uikit";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 
 const Spinner: React.FC = () => (<div className={styles.messagesList__spinner}><Spin/></div>);
 
-const Chat: React.FC<MessagesListProps> = memo((props) => {
+const MessagesList: React.FC<MessagesListProps> = memo((props) => {
   const {
     messages,
     onLoadMoreUp,
@@ -20,29 +20,32 @@ const Chat: React.FC<MessagesListProps> = memo((props) => {
   } = props;
 
   return (
-      <div
-        className={styles.messagesList__wrapper}
-      >
-        <Virtuoso
-          overscan={2000}
-          initialTopMostItemIndex={groupsCount}
-          firstItemIndex={listStartIndex}
-          data={messages}
-          startReached={onLoadMoreUp}
-          endReached={onLoadMoreDown}
-          itemContent={(_, item) => (
-            <MessageItem
-              {...item}
-              key={item.id}
-            />
-          )}
-          components={{
-            Header: isLoading ? Spinner : undefined,
-            Footer: isLoading ? Spinner : undefined,
-          }}
-        />
-      </div>
+    <div
+      className={styles.messagesList__wrapper}
+    >
+      <Virtuoso
+        overscan={10000}
+        initialTopMostItemIndex={groupsCount}
+        firstItemIndex={listStartIndex}
+        computeItemKey={(_, item) => item.id}
+        data={messages}
+        startReached={onLoadMoreUp}
+        endReached={onLoadMoreDown}
+        itemContent={(_, item) => (
+          <MessageItem
+            {...item}
+            key={item.id}
+          />
+        )}
+        components={{
+          Header: isLoading ? Spinner : undefined,
+          Footer: isLoading ? Spinner : undefined,
+        }}
+      />
+    </div>
   );
 });
 
-export default Chat;
+MessagesList.displayName = 'ChatHeader';
+
+export default MessagesList;
